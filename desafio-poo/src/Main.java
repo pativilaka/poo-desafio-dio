@@ -1,14 +1,15 @@
 import desafio_dominio.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        List<Double> xpListAux = new ArrayList<>();
 
         Curso curso1 = new Curso();
         curso1.setTitulo("Java");
@@ -32,8 +33,8 @@ public class Main {
         bootcamp.getConteudos().add(curso2);
         bootcamp.getConteudos().add(mentoria1);
 
-        Dev devPatricia = new Dev();
-        devPatricia.setNome("Patrícia Nunes");
+        Dev devPatricia = new Dev("Patrícia",0d);
+        //devPatricia.setNome("Patrícia Nunes");
         devPatricia.inscreverBootcamp(bootcamp);
         System.out.println("Conteúdos inscritos Patrícia: " + devPatricia.getConteudosInscritos());
         devPatricia.progredir();
@@ -44,15 +45,16 @@ public class Main {
         System.out.println("----");
         System.out.println("Conteúdos concluídos Patrícia: " + devPatricia.getConteudosConcluidos());
         System.out.println("----");
-        System.out.println("XP: " + devPatricia.calcularTotalXP());
+        devPatricia.setPositionXp(devPatricia.calcularTotalXP());
+        System.out.println(devPatricia.getPositionXp());
 
 
         System.out.println();
         System.out.println("///////////////////////////////////////////////////////");
         System.out.println();
 
-        Dev devCamila = new Dev();
-        devCamila.setNome("Camila Cavalcante");
+        Dev devCamila = new Dev("Camila",0d);
+        //devCamila.setNome("Camila Cavalcante");
         devCamila.inscreverBootcamp(bootcamp);
         System.out.println("Conteúdos inscritos Camila: " + devCamila.getConteudosInscritos());
         System.out.println("----");
@@ -63,6 +65,20 @@ public class Main {
         System.out.println("----");
         System.out.println("XP: " + devCamila.calcularTotalXP());
 
-    }
+        System.out.println("////////////////////////////////////////");
+        System.out.println("Tentativas com conllection");
 
+        Map<String, Dev> meuComparator = new HashMap<>(){{
+            put("First", new Dev("Patrícia",210d));
+            put("Second", new Dev("Camila",80d));
+        }};
+
+        System.out.println("Imprima do menor para o maior : ) "); /// Estudando para melhorar conhecimento de collection
+
+        Set<Map.Entry<String,Dev>> comparador = new TreeSet<>(new ComparatorXp());
+        comparador.addAll(meuComparator.entrySet());
+        for (Map.Entry<String, Dev> rank : comparador){
+            System.out.println(rank.getKey() + " - " + rank.getValue().getNome() + " - " + rank.getValue().getPositionXp());
+        }
+    }
 }

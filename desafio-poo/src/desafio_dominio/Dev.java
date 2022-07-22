@@ -8,8 +8,12 @@ import java.util.Set;
 public class Dev {
 
     private String nome;
+
+    private Double positionXp;
+
     private Set<Conteudo> conteudosInscritos = new LinkedHashSet<>();
     private Set<Conteudo> conteudosConcluidos = new LinkedHashSet<>();
+
 
     public void inscreverBootcamp(Bootcamp bootcamp) {
         this.conteudosInscritos.addAll(bootcamp.getConteudos());
@@ -33,6 +37,19 @@ public class Dev {
                 .sum();
     }
 
+    public Dev(String nome, Double positionXp) {
+        this.nome = nome;
+        this.positionXp = positionXp;
+    }
+
+    public Double getPositionXp() {
+        return positionXp;
+    }
+
+    public void setPositionXp(Double positionXp) {
+        this.positionXp = positionXp;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -40,6 +57,7 @@ public class Dev {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
 
     public Set<Conteudo> getConteudosInscritos() {
         return conteudosInscritos;
